@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
 export function useAppVM() {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [resumeSrc, setResumeSrc] = useState('');
     const [darkMode, setDarkMode] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
     const [visible, setVisible] = useState(false);
@@ -59,38 +56,12 @@ export function useAppVM() {
         };
     }, []);
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen((prev) => !prev);
-    };
-
-    const openModal = (lang) => {
-        const path =
-            lang === 'en'
-                ? '/cv_developer_shauny_persy_EN.pdf'
-                : '/cv_developer_shauny_persy.pdf';
-        setResumeSrc(path);
-        setIsModalOpen(true);
-        setIsDropdownOpen(false);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setResumeSrc('');
-    };
-
     const toggleDarkMode = () => {
         setDarkMode((prev) => !prev);
     };
 
     return {
-        isDropdownOpen,
-        setIsDropdownOpen,
-        isModalOpen,
-        resumeSrc,
         darkMode,
-        toggleDropdown,
-        openModal,
-        closeModal,
         toggleDarkMode,
         sectionRefs,
         activeSection,

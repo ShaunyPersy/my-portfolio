@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import { FaArrowUp } from 'react-icons/fa';
 import './App.css';
 import { useAppVM } from './AppVM';
@@ -10,13 +9,7 @@ import Skills from './components/Skills';
 
 function App() {
   const {
-    isDropdownOpen,
-    isModalOpen,
-    resumeSrc,
     darkMode,
-    toggleDropdown,
-    openModal,
-    closeModal,
     toggleDarkMode,
     sectionRefs,
     activeSection,
@@ -64,11 +57,7 @@ function App() {
           ref={el => (sectionRefs.current.home = el)}
           className='component'
         >
-          <Home
-            toggleDropdown={toggleDropdown}
-            openModal={openModal}
-            isDropdownOpen={isDropdownOpen}
-          />
+          <Home />
         </section>
 
         <section
@@ -103,61 +92,6 @@ function App() {
           <Contact />
         </section>
       </main>
-
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'
-            onClick={closeModal}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              style={{ boxSizing: 'border-box' }}
-              className='bg-white dark:bg-gray-800 rounded-2xl shadow-2xl dark:shadow-black w-4/5 h-full relative flex flex-col p-6'
-              onClick={e => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModal}
-                className='
-                  absolute top-3 right-4
-                  w-8 h-8
-                  flex items-center justify-center
-                  rounded-full
-                  border
-                  border-gray-300 dark:border-gray-600
-                  bg-gray-200 dark:bg-gray-700
-                  text-gray-600 dark:text-gray-300
-                  hover:bg-red-500 hover:text-white
-                  dark:hover:bg-red-600 dark:hover:text-white
-                  transition-all
-                  focus:outline-none
-                  focus:ring-2 focus:ring-red-400
-                '
-                aria-label='Close modal'
-              >
-                ×
-              </button>
-
-              <h2 className='text-xl font-semibold mb-4 text-center text-gray-900 dark:text-gray-100'>
-                📄 My Resume ({resumeSrc.includes('EN') ? 'EN' : 'NL'})
-              </h2>
-
-              <iframe
-                src={resumeSrc}
-                title='Resume'
-                className='flex-grow rounded border border-gray-300 dark:border-gray-700 shadow-inner dark:shadow-black'
-                style={{ width: '100%', border: 'none' }}
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {visible && (
         <button
